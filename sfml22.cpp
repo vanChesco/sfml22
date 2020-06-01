@@ -8,13 +8,13 @@ int main()
     sf::Event event;
 
     int y{ 0 }, x{ 0 }, a{ 1 }, b{ 1 };
-    int r{ 10 };
+    int r{ 10 }, R{ 0 }, G{ 0 }, B{ 0 };
 
-    window.setFramerateLimit(240);
+    window.setFramerateLimit(250);
 
     while (window.isOpen())
     {
-        window.clear(sf::Color(100, 0, 0));
+        window.clear(sf::Color(R, G, B));
 
         while (window.pollEvent(event))
         {
@@ -29,11 +29,21 @@ int main()
         circle.setOrigin(r, r);
         circle.setPosition(float(x+1), float(y+1));
         window.draw(circle);
+
         if (y > (300 - r) || y < (0)) a=-a;
         y = (y+a);
 
         if (x > 400 || x < 0) b = -b;
         x = x + b;
+
+        if (R > 255) R = -R++;
+        else R++;
+
+        if (G > 255) G = -G - 2;
+        else G=G+2;
+
+        if (B > 255) B = -G - 3;
+        else B = B + 3;
 
         window.display();
     }
