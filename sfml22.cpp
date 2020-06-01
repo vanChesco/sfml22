@@ -7,14 +7,14 @@ int main()
 
     sf::Event event;
 
-    int i{ 0 }, a{ 1 };
+    int y{ 0 }, x{ 0 }, a{ 1 }, b{ 1 };
     int r{ 10 };
 
     window.setFramerateLimit(240);
 
     while (window.isOpen())
     {
-        window.clear(sf::Color(0, 255, 255));
+        window.clear(sf::Color(100, 0, 0));
 
         while (window.pollEvent(event))
         {
@@ -27,10 +27,13 @@ int main()
         sf::CircleShape circle(r);
         circle.setFillColor(sf::Color::Black);
         circle.setOrigin(r, r);
-        circle.setPosition(100, float(i+1));
+        circle.setPosition(float(x+1), float(y+1));
         window.draw(circle);
-        if (i > (300 - r) || i < (0)) a=-a;
-        i = a*(i+1);
+        if (y > (300 - r) || y < (0)) a=-a;
+        y = (y+a);
+
+        if (x > 400 || x < 0) b = -b;
+        x = x + b;
 
         window.display();
     }
